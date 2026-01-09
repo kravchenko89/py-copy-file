@@ -6,9 +6,11 @@ def copy_file(command: str) -> None:
 
     _, source_file, target_file = parts
 
-    # Do nothing if file names are the same
     if source_file == target_file:
         return
 
-    with open(source_file, "r") as file_in, open(target_file, "w") as file_out:
-        file_out.write(file_in.read())
+    try:
+        with open(source_file, "r") as file_in, open(target_file, "w") as file_out:
+            file_out.write(file_in.read())
+    except FileNotFoundError:
+        return
